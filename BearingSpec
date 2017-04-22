@@ -1,0 +1,19 @@
+P = psi - this the the pressure on the projected area of the bearing from the load
+V = sfpm - this is the surface speed of the wear surface (surface feet per minute)
+
+Assuming load of 100 N - this is 22 lbs
+Long bearing is 3" long, the shorter support on the other end is 3/8" long - total length is 3 3/8"
+Shaft is steel, .5" in diameter
+Total bearing projected area is 1 11/16 square inches = 1.6875 square inches
+Total pressure is therefore 13.04 psi
+
+Bearing material is 932 Bronze (SAE 660)
+Max. P = 4000 psi
+Max. V = 750 sfpm
+Max. PV = 75,000 psi*sfpm
+
+For sleeve (plain) bearings, the surface speed is .262 (pi ÷12) x RPM x shaft diameter in inches
+Solving for max RPM:
+RPM = 750 sfpm / (.5" * .262)
+
+Max. rotational speed is 5,725 RPM
