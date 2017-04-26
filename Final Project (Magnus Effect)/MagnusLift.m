@@ -48,7 +48,3 @@ title('Quaker Oats Can Airfoil, 20 m/s Airspeed')
 xlabel('Airfoil Rotational Speed (RPM)');
 ylabel('Lift Force (N)');
 grid on;
-
-
-
-
