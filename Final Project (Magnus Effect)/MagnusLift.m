@@ -8,7 +8,7 @@ rho = 1.2; %hg/m^3 - density of air
 L = .127; %length of the airfoil in meters
 Force = rho*v.*G*L; %lift force
 
-figure(1)
+figure
 plot(RPM,Force);
 title('Stella Can Airfoil, 20 m/s Airspeed')
 xlabel('Airfoil Rotational Speed (RPM)');
@@ -25,7 +25,7 @@ rho = 1.2; %hg/m^3 - density of air
 L = .157; %length of the airfoil in meters
 Force = rho*v.*G*L; %lift force
 
-figure(2)
+figure
 plot(RPM,Force);
 title('Bud Heavy Can Airfoil, 20 m/s Airspeed')
 xlabel('Airfoil Rotational Speed (RPM)');
@@ -42,7 +42,7 @@ rho = 1.2; %hg/m^3 - density of air
 L = .2286; %length of the airfoil in meters
 Force = rho*v.*G*L; %lift force
 
-figure(3)
+figure
 plot(RPM,Force);
 title('Quaker Oats Can Airfoil, 20 m/s Airspeed')
 xlabel('Airfoil Rotational Speed (RPM)');

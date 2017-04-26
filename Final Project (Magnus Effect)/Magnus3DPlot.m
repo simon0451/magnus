@@ -23,6 +23,7 @@ title('Magnus Lift on Cylindrical Airfoil, 20 m/s Airspeed')
 xlabel('Airfoil Rotational Speed (RPM)');
 ylabel('Cylinder Radius (m)');
 zlabel('Lift Force (N)');
+shading interp
 
 figure;
 plot(RPM,linForce);
