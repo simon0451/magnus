@@ -30,30 +30,16 @@ close all;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Overall experiment variables:
-% air density:
-% Durham atmospheric pressure on APril 30, 2017
-% data obtained from WeatherForYou.com for April 30, 2017
-atmPressure = 30.22; % [inHg]
-atmP = 30.22*3386.39; % converting from [inHg] to [Pa]
-air_rho = 
-
 % windspeeds:
 % pitot tube readings
 p1_4Speed = 3; % [inWater]
 p2_4Speed = 1.6;
-% dynamic pressure = difference of two
-pDyn_4Speed = p1_4Speed - p2_4Speed;
-% finding wind speed from dynamic pressure
-v_4Speed = sqrt(2*pDyn_4Speed/air_rho);
-
 p1_3Speed = 2.45;
-p2_3Speed = 1.5;
-
-p1_2Speed = 2;
-p2_2Speed = 1.35;
-
-p1_1Speed = 1.65;
-p2_1Speed = 1.3;
+p2_3Speed = 1.5
+p1_2Speed = 
+p2_2Speed = 
+p1_1Speed = 
+p2_1Speed = 
 
 %% 1. Effect of RPM on lift force at constant wind speed for each airfoil
 
