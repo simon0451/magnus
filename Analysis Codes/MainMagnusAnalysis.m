@@ -9,7 +9,7 @@ close all;
 % G: vortex strength - found using G = 2*pi*r^2*omega
 %                                   r: cylinder radius
 %                                   omega: RPM in rad/s
-% L: characteristic length of the cylinder = diameter = 2*r
+% L: length of the cylinder
 % FL = rho*v*G*L = rho*v*4*pi^2*r^2*omega*L = rho*v*4*pi^2*r^2*omega*L
 % 
 % Topics to analyze:
@@ -17,9 +17,7 @@ close all;
 %       - expect linear relationship
 % 2. Effect of changing wind speed on lift force at constant RPM
 %       - expect linear relationship
-% 3. Effect of changing radius on lift force
-%       - expect cubic relationship
-% 4. Effect of linearly increasing wind speed on lift force
+% 3. Effect of linearly increasing wind speed on lift force
 %       - expect linear relationship
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -319,55 +317,148 @@ title({'Measured Lift Force of Quaker Cylinder vs. RPM','at Constant Wind Speeds
 l = legend('Location','best','24 m/s','20 m/s','16 m/s','12 m/s');
 set(l,'FontSize',12);
 
-% %% 2. Effect of changing wind speed on lift force
-% % Experiment was conducted to have approximately the same RPM. Assuming the
-% % difference in lift force from <300 RPM difference is negligible for the
-% % purpose of seeking a pattern.
-% speeds = [speed4,speed3,speed2,speed1];
-% 
-% % Stella Cylinder
-% figure;
-% hold on;
-% plot(speeds,forceStella(:,1),'--*');
-% plot(speeds,forceStella(:,2),'-.x');
-% plot(speeds,forceStella(:,3),'k:d');
-% xlim([10 26]);
-% xlabel('Wind Speeds (m/s)');
-% ylabel('Lift Force (N)');
-% title('Effect of Wind Speed on Stella Cylinder Lift Force Assuming Constant RPM');
-% legend('Location','best','~3000 RPM','~4000 RPM','~6000 RPM');
-% 
-% % Bud Cylinder
-% figure;
-% hold on;
-% plot(speeds([1,2,4]),forceBud([1,2,4],1),'--*');
-% plot(speeds([1,2,4]),forceBud([1,2,4],2),'-.x');
-% plot(speeds([1,2,4]),forceBud([1,2,4],3),'k:d');
-% xlim([10 26]);
-% xlabel('Wind Speeds (m/s)');
-% ylabel('Lift Force (N)');
-% title('Effect of Wind Speed on Bud Cylinder Lift Force Assuming Constant RPM');
-% legend('Location','best','~3000 RPM','~5000 RPM','~6000 RPM');
-% 
-% % Oats Cylinder
-% figure;
-% hold on;
-% plot(speeds,forceQuaker(:,1),'--*');
-% plot(speeds,forceQuaker(:,2),'-.x');
-% plot(speeds,forceQuaker(:,3),'k:d');
-% xlim([10 26]);
-% xlabel('Wind Speeds (m/s)');
-% ylabel('Lift Force (N)');
-% title('Effect of Wind Speed on Oats Cylinder Lift Force Assuming Constant RPM');
-% legend('Location','best','~3500 RPM','~4250 RPM','~5500 RPM');
-% 
-% %% 3. Effect of radius on lift force - After completing previous two sections
-% % wind speed 23.8 m/s
-% d1 = 57.91/1000; % stella diameter in meters
-% d2 = 83.82/1000; % budweiser diameter in meters
-% d3 = 128.27/1000; % quaker oats diameter in meters
-% 
-% % lift force of stella diameter at 23.8 wind speed at around 3000 RPM
-% fl1_v238_R3000 = 1.43; % [N]
-% fl2_v238_R3000 = 10.25; % [N]
-% fl3_v238_R3000 = 10.6; % [N]
+%% 2. Effect of changing wind speed on lift force
+
+%% Plotting all the data
+% Experiment was conducted to have approximately the same RPM. Assuming the
+% difference in lift force from <300 RPM difference is negligible for the
+% purpose of seeking a pattern.
+speeds = [speed4,speed3,speed2,speed1];
+
+% Stella Cylinder
+figure;
+hold on;
+plot(speeds,forceStella(:,3),'--*');
+plot(speeds,forceStella(:,2),'-.x');
+plot(speeds,forceStella(:,1),'k:d');
+xlim([10 26]);
+xlabel('Wind Speeds (m/s)','FontSize',12);
+ylabel('Lift Force (N)','FontSize',12);
+title({'Effect of Wind Speed on Stella Cylinder Lift Force','Assuming Constant RPM'},'FontSize',14);
+l = legend('Location','best','~3000 RPM','~4000 RPM','~6000 RPM');
+set(l,'FontSize',12);
+
+% Bud Cylinder
+figure;
+hold on;
+plot(speeds([1,3,4]),forceBud([1,3,4],3),'--*');
+plot(speeds([1,3,4]),forceBud([1,3,4],2),'-.x');
+plot(speeds([1,3,4]),forceBud([1,3,4],1),'k:d');
+xlim([10 26]);
+xlabel('Wind Speeds (m/s)','FontSize',12);
+ylabel('Lift Force (N)','FontSize',12);
+title({'Effect of Wind Speed on Bud Cylinder Lift Force','Assuming Constant RPM'},'FontSize',14);
+l = legend('Location','best','~3000 RPM','~5000 RPM','~6000 RPM');
+set(l,'FontSize',12);
+
+% Oats Cylinder
+figure;
+hold on;
+plot(speeds,forceQuaker(:,3),'--*');
+plot(speeds,forceQuaker(:,2),'-.x');
+plot(speeds,forceQuaker(:,1),'k:d');
+xlim([10 26]);
+xlabel('Wind Speeds (m/s)','FontSize',12);
+ylabel('Lift Force (N)','FontSize',12);
+title({'Effect of Wind Speed on Oats Cylinder Lift Force','Assuming Constant RPM'},'FontSize',14);
+l = legend('Location','best','~3500 RPM','~4250 RPM','~5500 RPM');
+set(l,'FontSize',12);
+
+%% fitting the wind speed data
+stellaWindRPMfit6k = polyfit(speeds',forceStella(:,1),1);
+sWRfitx = speeds(4):(speeds(1) - speeds(4))/10:speeds(1);
+sWRfity = sWRfitx*stellaWindRPMfit6k(1) + stellaWindRPMfit6k(2);
+
+figure;
+plot(speeds,forceStella(:,1),'*',sWRfitx,sWRfity);
+xlabel('Wind Speed (m/s)','FontSize',12);
+ylabel('Lift Force (N)','FontSize',12);
+title('Lift Force vs. Wind Speed Stella Cylinder at 6000 rpm','FontSize',14);
+l = legend('Location','best','Data','Best Fit');
+set(l,'FontSize',12);
+
+budWindRPMfit6k = polyfit(speeds([1,3,4])',forceBud([1,3,4],1),1);
+bWRfitx = speeds(4):(speeds(1) - speeds(4))/10:speeds(1);
+bWRfity = bWRfitx*budWindRPMfit6k(1) + budWindRPMfit6k(2);
+
+figure;
+plot(speeds([1,3,4]),forceBud([1,3,4],1),'*',bWRfitx,bWRfity);
+xlabel('Wind Speed (m/s)','FontSize',12);
+ylabel('Lift Force (N)','FontSize',12);
+title('Lift Force vs. Wind Speed Bud Cylinder 6000 rpm','FontSize',14);
+l = legend('Location','best','Data','Best Fit');
+set(l,'FontSize',12);
+
+quakerWindRPMfit6k = polyfit(speeds',forceQuaker(:,1),1);
+qWRfitx = speeds(4):(speeds(1) - speeds(4))/10:speeds(1);
+qWRfity = qWRfitx*quakerWindRPMfit6k(1) + quakerWindRPMfit6k(2);
+
+figure;
+plot(speeds,forceQuaker(:,1),'*',qWRfitx,qWRfity);
+xlabel('Wind Speed (m/s)','FontSize',12);
+ylabel('Lift Force (N)','FontSize',12);
+title('Lift Force vs. Wind Speed Quaker Cylinder 6000 rpm','FontSize',14);
+l = legend('Location','best','Data','Best Fit');
+set(l,'FontSize',12);
+
+%% 3. Effect of increasing wind speed on a fixed RPM on the lift force
+
+%% Plotting and fitting
+windSpeed = [11.12,16.37,20.3,23.59,26.47,29.42]; % [m/s]
+liftForce = [0.67,0.61,0.5,0.4,0.36,0.47]; % [N]
+
+windForceFit = polyfit(windSpeed,liftForce,1);
+windForcex = linspace(windSpeed(1),windSpeed(end),6);
+windForcey = windForcex*windForceFit(1) + windForceFit(2);
+
+%% Error Analysis
+% confidence interval-------------------------------------------
+% defining the degree of freedom and confidence interval
+N = length(windSpeed);
+dF = N - (1 + 1);
+confidenceLevel = 0.975; % Matlab uses one-tail probability
+
+% finding the t score
+t = tinv(confidenceLevel,dF);
+% t = 2.3060
+
+% average value of x axis data
+xMean = mean(windSpeed);
+
+% the sum of difference of X - xbar squared
+SSxx = sum((windSpeed - xMean).^2);
+
+% finding the term of sum of difference of y axis - yfit squared
+SSres = sum((liftForce - windForcey).^2);
+
+% finding Syx
+Syx = sqrt(SSres/dF);
+
+% fit confidence interval max and min
+fitCf = t*Syx*sqrt(1/N + ((windSpeed - xMean).^2)/SSxx);
+minFitCf = windForcey - fitCf;
+maxFitCf = windForcey + fitCf;
+
+% measurement confidence interval max and min
+measCf = t*Syx*sqrt(1 + 1/N + ((windSpeed - xMean).^2)/SSxx);
+minMeaCf = windForcey - measCf;
+maxMeaCf = windForcey + measCf;
+% confidence interval ends--------------------------------------
+
+%% Plotting everythang
+figure;
+plot(windSpeed,liftForce,'x',windForcex,windForcey);
+hold on;
+p1 = plot(windSpeed,minFitCf,'r:');
+p2 = plot(windSpeed,maxFitCf,'r:');
+p3 = plot(windSpeed,minMeaCf,'b--');
+p4 = plot(windSpeed,maxMeaCf,'b--');
+set(get(get(p2,'Annotation'),'LegendInformation'),...
+    'IconDisplayStyle','off');
+set(get(get(p4,'Annotation'),'LegendInformation'),...
+    'IconDisplayStyle','off');
+xlabel('Wind Speed (m/s)','FontSize',12);
+ylabel('Lift Force (N)','FontSize',12);
+title('Lift Force vs. Wind Speed for Stella Cylinder','FontSize',14);
+l = legend('Location','best','Experiment Data','Best fit line','Confidence of Fit','Confidence of Measurement');
+set(l,'FontSize',12);
