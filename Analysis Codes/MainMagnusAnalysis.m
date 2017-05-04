@@ -462,3 +462,130 @@ ylabel('Lift Force (N)','FontSize',12);
 title('Lift Force vs. Wind Speed for Stella Cylinder','FontSize',14);
 l = legend('Location','best','Experiment Data','Best fit line','Confidence of Fit','Confidence of Measurement');
 set(l,'FontSize',12);
+
+%% Calculateing the Coefficient of Lift 
+%  THEORETICAL
+
+% Below calculations were done using the equation found 
+% in Tokumaru pdf
+% Note: in the document a = radius
+% CL = Lift/rhoair*(velocity.^2)*radius
+
+% Coeffeicient of lift for Stella
+CLthStella1 = FLStella1/airrho*(speed1^2)*rStella;
+CLthStella2 = FLStella2/airrho*(speed2^2)*rStella;
+CLthStella3 = FLStella3/airrho*(speed3^2)*rStella;
+CLthStella4 = FLStella4/airrho*(speed4^2)*rStella;
+
+% Coeffeicient of lift for Bud Heavy
+CLthBud1 = FLBud1/airrho*(speed1^2)*rBud;
+CLthBud2 = FLBud2/airrho*(speed2^2)*rBud;
+CLthBud3 = FLBud3/airrho*(speed3^2)*rBud;
+CLthBud4 = FLBud4/airrho*(speed4^2)*rBud;
+
+% Coeffeicient of lift for Oats
+CLthQuaker1 = FLQuaker1/airrho*(speed1^2)*rQuaker;
+CLthQuaker2 = FLQuaker2/airrho*(speed2^2)*rQuaker;
+CLthQuaker3 = FLQuaker3/airrho*(speed3^2)*rQuaker;
+CLthQuaker4 = FLQuaker4/airrho*(speed4^2)*rQuaker;
+
+%% Plot Theoretical Coefficent of Lift
+
+figure
+hold on
+plot(RPMMagnusStella,CLthStella1,'-')
+plot(RPMMagnusStella,CLthStella2,'-')
+plot(RPMMagnusStella,CLthStella3,'-')
+plot(RPMMagnusStella,CLthStella4,'-')
+title('Theoretical Coefficient of Lift for Stella Cylinder')
+xlabel('Velocity (m/s)')
+ylabel('CL')
+legend('Location','northwest','12 m/s','16 m/s','20 m/s','24 m/s')
+
+figure
+hold on
+plot(RPMMagnusBud,CLthBud1,'-')
+plot(RPMMagnusBud,CLthBud2,'-')
+plot(RPMMagnusBud,CLthBud3,'-')
+plot(RPMMagnusBud,CLthBud4,'-')
+title('Theoretical Coefficient of Lift for Bud Heavy Cylinder')
+xlabel('Velocity (m/s)')
+ylabel('CL')
+legend('Location','northwest','12 m/s','16 m/s','20 m/s','24 m/s')
+
+figure
+hold on
+plot(RPMMagnusQuaker,CLthQuaker1,'-')
+plot(RPMMagnusQuaker,CLthQuaker2,'-')
+plot(RPMMagnusQuaker,CLthQuaker3,'-')
+plot(RPMMagnusQuaker,CLthQuaker4,'-')
+title('Theoretical Coefficient of Lift for Quaker Oat Cylinder')
+xlabel('Velocity (m/s)')
+ylabel('CL')
+legend('Location','northwest','12 m/s','16 m/s','20 m/s','24 m/s')
+
+%% Calculateing the Coefficient of Lift 
+%  EXPERIMENTAL
+
+% Below calculations were done using the equation found 
+% in Tokumaru pdf
+% Note: in the document a = radius
+% CL = Lift/rhoair*(velocity.^2)*radius
+
+% All speeds in order of smallest to greatest magnitude of velocity
+%speedslr = fliplr(speeds);
+
+% Coeffeicient of lift for Stella
+% Organized by trial (Constant windpeed, changing rpm)
+CLexpStella1 = forceStella(1,:)./airrho*(speed1^2)*rStella;
+CLexpStella2 = forceStella(2,:)./airrho*(speed2^2)*rStella;
+CLexpStella3 = forceStella(3,:)./airrho*(speed3^2)*rStella;
+CLexpStella4 = forceStella(4,:)./airrho*(speed4^2)*rStella;
+
+% Coeffeicient of lift for Bud Heavy
+% Organized by trial (Constant windpeed, changing rpm)
+CLexpBud1 = forceBud(1,:)./airrho*(speed1^2)*rBud;
+CLexpBud3 = forceBud(3,:)./airrho*(speed3^2)*rBud;
+CLexpBud4 = forceBud(4,:)./airrho*(speed4^2)*rBud;
+
+
+% Coeffeicient of lift for Oats
+% Organized by trial (Constant windpeed, changing rpm)
+CLexpQuaker1 = forceQuaker(1,:)./airrho*(speed1^2)*rQuaker;
+CLexpQuaker2 = forceQuaker(2,:)./airrho*(speed2^2)*rQuaker;
+CLexpQuaker3 = forceQuaker(3,:)./airrho*(speed3^2)*rQuaker;
+CLexpQuaker4 = forceQuaker(4,:)./airrho*(speed4^2)*rQuaker;
+
+%% Plot for Experimental Coefficient of Lift
+
+figure
+hold on
+plot(RPMStella(1,:),CLexpStella1,'--o')
+plot(RPMStella(2,:),CLexpStella2,'--o')
+plot(RPMStella(3,:),CLexpStella3,'--o')
+plot(RPMStella(4,:),CLexpStella4,'--o')
+title('Experimental Coefficient of Lift for Stella Cylinder')
+xlabel('Velocity (m/s)')
+ylabel('CL')
+legend('Location','northwest','12 m/s','16 m/s','20 m/s','24 m/s')
+
+figure
+hold on
+plot(RPMBud(1,:),CLexpBud1,'--o')
+plot(RPMBud(3,:),CLexpBud3,'--o')
+plot(RPMBud(4,:),CLexpBud4,'--o')
+title('Experimental Coefficient of Lift for Bud Heavy Cylinder')
+xlabel('Velocity (m/s)')
+ylabel('CL')
+legend('Location','northwest','12 m/s','20 m/s','24 m/s')
+
+figure
+hold on
+plot(RPMQuaker(1,:),CLexpQuaker1,'--o')
+plot(RPMQuaker(2,:),CLexpQuaker2,'--o')
+plot(RPMQuaker(3,:),CLexpQuaker3,'--o')
+plot(RPMQuaker(4,:),CLexpQuaker4,'--o')
+title('Experimental Coefficient of Lift for Quaker Oat Cylinder')
+xlabel('Velocity (m/s)')
+ylabel('CL')
+legend('Location','northwest','12 m/s','16 m/s','20 m/s','24 m/s')
