@@ -1,6 +1,6 @@
 clear all;
 close all;
-
+clc;
 % Magnus Effect Overview
 % Variables:
 % FL: lift force - measured by force balance
@@ -323,9 +323,10 @@ set(l,'FontSize',12);
 %% Calculating Reynolds number for 3 cylinders and all 4 speeds 
 
 speeds1to4 = [speed1,speed2,speed3,speed4];
+speeds1to4stella = [speed1,speed2,speed3,speed4,29.420];
 nu = 15.11e-6; % (m^2/s) kinematic viscosity of air at room temperature
 
-ReStella = speeds1to4.*(rStella*2)/nu;
+ReStella = speeds1to4stella.*(rStella*2)/nu;
 ReBud = speeds1to4.*(rBud*2)/nu;
 ReQuaker = speeds1to4.*(rQuaker*2)/nu;
 strReStella = sprintf('Re = %1.3d \n',ReStella);
@@ -610,3 +611,20 @@ title('Experimental Coefficient of Lift for Quaker Oat Cylinder')
 xlabel('Velocity (m/s)')
 ylabel('CL')
 legend('Location','northwest','12 m/s','16 m/s','20 m/s','24 m/s')
+
+%% Misc Info
+
+MStoMPH = 2.23694; % m/s to mph
+
+mph1 = speed1*MStoMPH; % slowest test speed m/s to mph
+mph4 = speed4*MStoMPH; % fastest for most tests m/s to mph
+mphMAX = windSpeed(end)*MStoMPH; % Max wind speed for stella on the last test
+
+mphstr1 = sprintf('Our slowest test wind speed of %1.1f m/s = %1.1f mph',speed1,mph1);
+mphstr2 = sprintf('Our "fastest" test wind speed (for our primary tests of 3 cylinders) of %1.1f m/s = %1.1f mph',speed4,mph4);
+mphstr3 = sprintf('Our MAX test wind speed on Stella was %1.1f m/s = %1.1f mph',windSpeed(end),mphMAX);
+
+disp(mphstr1)
+disp(mphstr2)
+disp(mphstr3)
+
