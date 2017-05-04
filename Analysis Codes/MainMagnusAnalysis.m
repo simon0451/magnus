@@ -37,6 +37,7 @@ speed1 = 12.00973309;
 airrho = 1.2093;
 % [kg/m^3] from ideal gas law and the barometric pressure of the day
 
+
 %% 1. Effect of RPM on lift force at constant wind speed for each airfoil
 
 %% stella - r = 57.91/2000; % radius in [m]
@@ -319,10 +320,30 @@ set(l,'FontSize',12);
 
 %% 2. Effect of changing wind speed on lift force
 
+%% Calculating Reynolds number for 3 cylinders and all 4 speeds 
+
+speeds1to4 = [speed1,speed2,speed3,speed4];
+nu = 15.11e-6; % (m^2/s) kinematic viscosity of air at room temperature
+
+ReStella = speeds1to4.*(rStella*2)/nu;
+ReBud = speeds1to4.*(rBud*2)/nu;
+ReQuaker = speeds1to4.*(rQuaker*2)/nu;
+strReStella = sprintf('Re = %1.3d \n',ReStella);
+strReBud = sprintf('Re = %1.3d \n',ReBud);
+strReQuaker = sprintf('Re = %1.3d \n',ReQuaker);
+disp('Stella Reynolds Number for velocities in increasing magnitude (12,16,20,24) m/s')
+disp(strReStella)
+disp('Bud Heavy Reynolds Number for velocities in increasing magnitude (12,16,20,24) m/s')
+disp(strReBud)
+disp('Quaker Reynolds Number for velocities in increasing magnitude (12,16,20,24) m/s')
+disp(strReQuaker)
+
+
 %% Plotting all the data
 % Experiment was conducted to have approximately the same RPM. Assuming the
 % difference in lift force from <300 RPM difference is negligible for the
 % purpose of seeking a pattern.
+
 speeds = [speed4,speed3,speed2,speed1];
 
 % Stella Cylinder
