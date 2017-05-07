@@ -83,44 +83,44 @@ figure;
 hold on;
 plot(RPMMagnusStella,FLStella4,'r--');
 plot(RPMStella(4,:),forceStella(4,:),'bx',stellaFit4x,stellaFit4y,'b');
-xlabel('Cylinder Rotation Speed [RPM]','FontSize',12);
-ylabel('Lift Force (N)','FontSize',12);
-title('Lift Force vs. RPM at 24 m/s','FontSize',14);
+xlabel('Cylinder Rotation Speed [RPM]');
+ylabel('Lift Force (N)');
+title('Stella Cylinder Lift Force vs. RPM at 24 m/s');
 l = legend('Magnus Predicted','Experiment Data','Experiment Fit','Location','best');
-set(l,'FontSize',12);
+%set(l,'FontSize',12);
 
 % speed3 plots
 figure;
 hold on;
 plot(RPMMagnusStella,FLStella3,'r--');
 plot(RPMStella(3,:),forceStella(3,:),'bx',stellaFit3x,stellaFit3y,'b');
-xlabel('Cylinder Rotation Speed [RPM]','FontSize',12);
-ylabel('Lift Force (N)','FontSize',12);
-title('Lift Force vs. RPM at 20 m/s','FontSize',14);
+xlabel('Cylinder Rotation Speed [RPM]');
+ylabel('Lift Force (N)');
+title('Stella Cylinder Lift Force vs. RPM at 20 m/s');
 l = legend('Magnus Predicted','Experiment Data','Experiment Fit','Location','best');
-set(l,'FontSize',12);
+%set(l,'FontSize',12);
 
 % speed2 plots
 figure;
 hold on;
 plot(RPMMagnusStella,FLStella2,'r--');
 plot(RPMStella(2,:),forceStella(2,:),'bx',stellaFit2x,stellaFit2y,'b');
-xlabel('Cylinder Rotation Speed [RPM]','FontSize',12);
-ylabel('Lift Force (N)','FontSize',12);
-title('Lift Force vs. RPM at 16 m/s','FontSize',14);
+xlabel('Cylinder Rotation Speed [RPM]');
+ylabel('Lift Force (N)');
+title('Stella Cylinder Lift Force vs. RPM at 16 m/s');
 l = legend('Magnus Predicted','Experiment Data','Experiment Fit','Location','best');
-set(l,'FontSize',12);
+%set(l,'FontSize',12);
 
 % speed1 plots
 figure;
 hold on;
 plot(RPMMagnusStella,FLStella1,'r--');
 plot(RPMStella(1,:),forceStella(1,:),'bx',stellaFit1x,stellaFit1y,'b');
-xlabel('Cylinder Rotation Speed [RPM]','FontSize',12);
-ylabel('Lift Force (N)','FontSize',12);
-title('Lift Force vs. RPM at 12 m/s','FontSize',14);
+xlabel('Cylinder Rotation Speed [RPM]');
+ylabel('Lift Force (N)');
+title('Stella Cylinder Lift Force vs. RPM at 12 m/s');
 l = legend('Magnus Predicted','Experiment Data','Experiment Fit','Location','best');
-set(l,'FontSize',12);
+%set(l,'FontSize',12);
 
 %% Bud - r = 83.82/2000; % radius in [m]
 rBud = 83.82/2000; % finding radius from diamter in [mm] to [m]
@@ -161,9 +161,9 @@ figure;
 hold on;
 plot(RPMMagnusBud,FLBud4,'r--');
 plot(RPMBud(4,:),forceBud(4,:),'bx',budFit4x,budFit4y,'b');
-xlabel('Cylinder Rotation Speed [RPM]','FontSize',12);
-ylabel('Lift Force (N)','FontSize',12);
-title('Lift Force vs. RPM at 24 m/s','FontSize',14);
+xlabel('Cylinder Rotation Speed [RPM]');
+ylabel('Lift Force (N)');
+title('Bud Heavy Cylinder Lift Force vs. RPM at 24 m/s');
 l = legend('Magnus Predicted','Experiment Data','Experiment Fit','Location','best');
 set(l,'FontSize',12);
 
@@ -172,11 +172,11 @@ figure;
 hold on;
 plot(RPMMagnusBud,FLBud3,'r--');
 plot(RPMBud(3,:),forceBud(3,:),'bx',budFit3x,budFit3y,'b');
-xlabel('Cylinder Rotation Speed [RPM]','FontSize',12);
-ylabel('Lift Force (N)','FontSize',12);
-title('Lift Force vs. RPM at 20 m/s','FontSize',14);
+xlabel('Cylinder Rotation Speed [RPM]');
+ylabel('Lift Force (N)');
+title('Bud Heavy Lift Force vs. RPM at 20 m/s');
 l = legend('Magnus Predicted','Experiment Data','Experiment Fit','Location','best');
-set(l,'FontSize',12);
+%set(l,'FontSize',12);
 
 % speed2 plot for Bud does not exist
 
@@ -185,11 +185,11 @@ figure;
 hold on;
 plot(RPMMagnusBud,FLBud1,'r--');
 plot(RPMBud(1,:),forceBud(1,:),'bx',budFit1x,budFit1y,'b');
-xlabel('Cylinder Rotation Speed [RPM]','FontSize',12);
-ylabel('Lift Force (N)','FontSize',12);
-title('Lift Force vs. RPM at 12 m/s','FontSize',14);
+xlabel('Cylinder Rotation Speed [RPM]');
+ylabel('Lift Force (N)');
+title('Bud Heavy Cylinder Lift Force vs. RPM at 12 m/s');
 l = legend('Magnus Predicted','Experiment Data','Experiment Fit','Location','best');
-set(l,'FontSize',12);
+%set(l,'FontSize',12);
 
 %% Quaker - r = 128.27/2000; % radius in [m]
 rQuaker = 128.27/2000;
@@ -234,44 +234,44 @@ figure;
 hold on;
 plot(RPMMagnusQuaker,FLQuaker4,'r--');
 plot(RPMQuaker(4,:),forceQuaker(4,:),'bx',quakerFit4x,quakerFit4y,'b');
-xlabel('Cylinder Rotation Speed [RPM]','FontSize',12);
-ylabel('Lift Force (N)','FontSize',12);
-title('Lift Force vs. RPM at 24 m/s','FontSize',14);
+xlabel('Cylinder Rotation Speed [RPM]');
+ylabel('Lift Force (N)');
+title('Quaker Oats Cylinder Lift Force vs. RPM at 24 m/s');
 l = legend('Magnus Predicted','Experiment Data','Experiment Fit','Location','best');
-set(l,'FontSize',12);
+%set(l,'FontSize',12);
 
 % speed3 plots
 figure;
 hold on;
 plot(RPMMagnusQuaker,FLQuaker3,'r--');
 plot(RPMQuaker(3,:),forceQuaker(3,:),'bx',quakerFit3x,quakerFit3y,'b');
-xlabel('Cylinder Rotation Speed [RPM]','FontSize',12);
-ylabel('Lift Force (N)','FontSize',12);
-title('Lift Force vs. RPM at 20 m/s','FontSize',14);
+xlabel('Cylinder Rotation Speed [RPM]');
+ylabel('Lift Force (N)');
+title('Quaker Oats Cylinder Lift Force vs. RPM at 20 m/s');
 l = legend('Magnus Predicted','Experiment Data','Experiment Fit','Location','best');
-set(l,'FontSize',12);
+%set(l,'FontSize',12);
 
 % speed2 plots
 figure;
 hold on;
 plot(RPMMagnusQuaker,FLQuaker2,'r--');
 plot(RPMQuaker(2,:),forceQuaker(2,:),'bx',quakerFit2x,quakerFit2y,'b');
-xlabel('Cylinder Rotation Speed [RPM]','FontSize',12);
-ylabel('Lift Force (N)','FontSize',12);
-title('Lift Force vs. RPM at 16 m/s','FontSize',14);
+xlabel('Cylinder Rotation Speed [RPM]');
+ylabel('Lift Force (N)');
+title('Quaker Oats Cylinder Lift Force vs. RPM at 16 m/s');
 l = legend('Magnus Predicted','Experiment Data','Experiment Fit','Location','best');
-set(l,'FontSize',12);
+%set(l,'FontSize',12);
 
 % speed1 plots
 figure;
 hold on;
 plot(RPMMagnusQuaker,FLQuaker1,'r--');
 plot(RPMQuaker(1,:),forceQuaker(1,:),'bx',quakerFit1x,quakerFit1y,'b');
-xlabel('Cylinder Rotation Speed [RPM]','FontSize',12);
-ylabel('Lift Force (N)','FontSize',12);
-title('Lift Force vs. RPM at 12 m/s','FontSize',14);
+xlabel('Cylinder Rotation Speed [RPM]');
+ylabel('Lift Force (N)');
+title('Quaker Oats Cylinder Lift Force vs. RPM at 12 m/s');
 l = legend('Magnus Predicted','Experiment Data','Experiment Fit','Location','best');
-set(l,'FontSize',12);
+%set(l,'FontSize',12);
 
 %% comparison to theory completed, looking for patterns within the collected
 % data
@@ -284,11 +284,11 @@ plot(RPMQuaker(3,:),forceQuaker(3,:),'--x');
 plot(RPMQuaker(2,:),forceQuaker(2,:),'--d');
 plot(RPMQuaker(1,:),forceQuaker(1,:),'--s');
 grid on;
-xlabel('Rotation Speed (RPM)','FontSize',12);
-ylabel('Life Force (N)','FontSize',12);
-title({'Measured Lift Force of Quaker Oats Cylinder vs. RPM','at Constant Wind Speeds'},'FontSize',14);
+xlabel('Rotation Speed (RPM)');
+ylabel('Life Force (N)');
+title({'Measured Lift Force of Quaker Oats Cylinder vs. RPM','at Constant Wind Speeds'});
 l = legend('Location','best','24 m/s','20 m/s','16 m/s','12 m/s');
-set(l,'FontSize',12);
+%set(l,'FontSize',12);
 
 % Bud Heavy cylinder
 figure;
@@ -299,10 +299,10 @@ plot(RPMBud(1,:),forceBud(1,:),'--s');
 grid on;
 xlabel('Rotation Speed (RPM)','FontSize',12);
 ylabel('Life Force (N)','FontSize',12);
-title({'Measured Lift Force of Bud Heavy Cylinder vs. RPM','at Constant Wind Speeds'},'FontSize',14);
-l = legend('Location','best','24 m/s','20 m/s','12 m/s');
-set(l,'FontSize',12);
-text(3250,22.5,'16 m/s wind speed has no data','FontSize',12);
+title({'Measured Lift Force of Bud Heavy Cylinder vs. RPM','at Constant Wind Speeds'});
+l = legend('Location','northeast','24 m/s','20 m/s','12 m/s');
+%set(l,'FontSize',12);
+text(3150,24,'16 m/s wind speed has no data','FontSize',12);
 
 % Quaker cylinder
 figure;
@@ -312,11 +312,11 @@ plot(RPMQuaker(3,:),forceQuaker(3,:),'--x');
 plot(RPMQuaker(2,:),forceQuaker(2,:),'--d');
 plot(RPMQuaker(1,:),forceQuaker(1,:),'--s');
 grid on;
-xlabel('Rotation Speed (RPM)','FontSize',12);
-ylabel('Life Force (N)','FontSize',12);
-title({'Measured Lift Force of Quaker Cylinder vs. RPM','at Constant Wind Speeds'},'FontSize',14);
+xlabel('Rotation Speed (RPM)');
+ylabel('Life Force (N)');
+title({'Measured Lift Force of Quaker Cylinder vs. RPM','at Constant Wind Speeds'});
 l = legend('Location','best','24 m/s','20 m/s','16 m/s','12 m/s');
-set(l,'FontSize',12);
+%set(l,'FontSize',12);
 
 %% 2. Effect of changing wind speed on lift force
 
@@ -356,9 +356,9 @@ plot(speeds,forceStella(:,1),'k:d');
 xlim([10 26]);
 xlabel('Wind Speeds (m/s)','FontSize',12);
 ylabel('Lift Force (N)','FontSize',12);
-title({'Effect of Wind Speed on Stella Cylinder Lift Force','Assuming Constant RPM'},'FontSize',14);
+title({'Effect of Wind Speed on Stella Cylinder Lift Force','Assuming Constant RPM'});
 l = legend('Location','best','~3000 RPM','~4000 RPM','~6000 RPM');
-set(l,'FontSize',12);
+%set(l,'FontSize',12);
 
 % Bud Cylinder
 figure;
@@ -369,9 +369,9 @@ plot(speeds([1,3,4]),forceBud([1,3,4],1),'k:d');
 xlim([10 26]);
 xlabel('Wind Speeds (m/s)','FontSize',12);
 ylabel('Lift Force (N)','FontSize',12);
-title({'Effect of Wind Speed on Bud Cylinder Lift Force','Assuming Constant RPM'},'FontSize',14);
+title({'Effect of Wind Speed on Bud Cylinder Lift Force','Assuming Constant RPM'});
 l = legend('Location','best','~3000 RPM','~5000 RPM','~6000 RPM');
-set(l,'FontSize',12);
+%set(l,'FontSize',12);
 
 % Oats Cylinder
 figure;
@@ -382,9 +382,9 @@ plot(speeds,forceQuaker(:,1),'k:d');
 xlim([10 26]);
 xlabel('Wind Speeds (m/s)','FontSize',12);
 ylabel('Lift Force (N)','FontSize',12);
-title({'Effect of Wind Speed on Oats Cylinder Lift Force','Assuming Constant RPM'},'FontSize',14);
+title({'Effect of Wind Speed on Oats Cylinder Lift Force','Assuming Constant RPM'});
 l = legend('Location','best','~3500 RPM','~4250 RPM','~5500 RPM');
-set(l,'FontSize',12);
+%set(l,'FontSize',12);
 
 %% fitting the wind speed data
 stellaWindRPMfit6k = polyfit(speeds',forceStella(:,1),1);
@@ -395,9 +395,9 @@ figure;
 plot(speeds,forceStella(:,1),'*',sWRfitx,sWRfity);
 xlabel('Wind Speed (m/s)','FontSize',12);
 ylabel('Lift Force (N)','FontSize',12);
-title('Lift Force vs. Wind Speed Stella Cylinder at 6000 rpm','FontSize',14);
+title('Lift Force vs. Wind Speed Stella Cylinder at 6000 rpm');
 l = legend('Location','best','Data','Best Fit');
-set(l,'FontSize',12);
+%set(l,'FontSize',12);
 
 budWindRPMfit6k = polyfit(speeds([1,3,4])',forceBud([1,3,4],1),1);
 bWRfitx = speeds(4):(speeds(1) - speeds(4))/10:speeds(1);
@@ -407,9 +407,9 @@ figure;
 plot(speeds([1,3,4]),forceBud([1,3,4],1),'*',bWRfitx,bWRfity);
 xlabel('Wind Speed (m/s)','FontSize',12);
 ylabel('Lift Force (N)','FontSize',12);
-title('Lift Force vs. Wind Speed Bud Cylinder 6000 rpm','FontSize',14);
+title('Lift Force vs. Wind Speed Bud Cylinder 6000 rpm');
 l = legend('Location','best','Data','Best Fit');
-set(l,'FontSize',12);
+%set(l,'FontSize',12);
 
 quakerWindRPMfit6k = polyfit(speeds',forceQuaker(:,1),1);
 qWRfitx = speeds(4):(speeds(1) - speeds(4))/10:speeds(1);
@@ -419,9 +419,9 @@ figure;
 plot(speeds,forceQuaker(:,1),'*',qWRfitx,qWRfity);
 xlabel('Wind Speed (m/s)','FontSize',12);
 ylabel('Lift Force (N)','FontSize',12);
-title('Lift Force vs. Wind Speed Quaker Cylinder 6000 rpm','FontSize',14);
+title('Lift Force vs. Wind Speed Quaker Cylinder 6000 rpm');
 l = legend('Location','best','Data','Best Fit');
-set(l,'FontSize',12);
+%set(l,'FontSize',12);
 
 %% 3. Effect of increasing wind speed on a fixed RPM on the lift force
 
@@ -481,9 +481,9 @@ set(get(get(p4,'Annotation'),'LegendInformation'),...
     'IconDisplayStyle','off');
 xlabel('Wind Speed (m/s)','FontSize',12);
 ylabel('Lift Force (N)','FontSize',12);
-title('Lift Force vs. Wind Speed for Stella Cylinder','FontSize',14);
+title('Lift Force vs. Wind Speed for Stella Cylinder');
 l = legend('Location','best','Experiment Data','Best fit line','Confidence of Fit','Confidence of Measurement');
-set(l,'FontSize',12);
+%set(l,'FontSize',12);
 
 %% Calculateing the Coefficient of Lift 
 %  THEORETICAL
@@ -521,8 +521,9 @@ plot(RPMMagnusStella,CLthStella3,'-')
 plot(RPMMagnusStella,CLthStella4,'-')
 title('Theoretical Coefficient of Lift for Stella Cylinder')
 xlabel('Velocity (m/s)')
-ylabel('CL')
+ylabel('C_L')
 legend('Location','northwest','12 m/s','16 m/s','20 m/s','24 m/s')
+grid on 
 
 figure
 hold on
@@ -532,8 +533,9 @@ plot(RPMMagnusBud,CLthBud3,'-')
 plot(RPMMagnusBud,CLthBud4,'-')
 title('Theoretical Coefficient of Lift for Bud Heavy Cylinder')
 xlabel('Velocity (m/s)')
-ylabel('CL')
+ylabel('C_L')
 legend('Location','northwest','12 m/s','16 m/s','20 m/s','24 m/s')
+grid on 
 
 figure
 hold on
@@ -543,8 +545,9 @@ plot(RPMMagnusQuaker,CLthQuaker3,'-')
 plot(RPMMagnusQuaker,CLthQuaker4,'-')
 title('Theoretical Coefficient of Lift for Quaker Oat Cylinder')
 xlabel('Velocity (m/s)')
-ylabel('CL')
+ylabel('C_L')
 legend('Location','northwest','12 m/s','16 m/s','20 m/s','24 m/s')
+grid on 
 
 %% Calculateing the Coefficient of Lift 
 %  EXPERIMENTAL
@@ -588,8 +591,9 @@ plot(RPMStella(3,:),CLexpStella3,'--o')
 plot(RPMStella(4,:),CLexpStella4,'--o')
 title('Experimental Coefficient of Lift for Stella Cylinder')
 xlabel('Velocity (m/s)')
-ylabel('CL')
+ylabel('C_L')
 legend('Location','northwest','12 m/s','16 m/s','20 m/s','24 m/s')
+grid on 
 
 figure
 hold on
@@ -598,8 +602,9 @@ plot(RPMBud(3,:),CLexpBud3,'--o')
 plot(RPMBud(4,:),CLexpBud4,'--o')
 title('Experimental Coefficient of Lift for Bud Heavy Cylinder')
 xlabel('Velocity (m/s)')
-ylabel('CL')
+ylabel('C_L')
 legend('Location','northwest','12 m/s','20 m/s','24 m/s')
+grid on 
 
 figure
 hold on
@@ -609,8 +614,9 @@ plot(RPMQuaker(3,:),CLexpQuaker3,'--o')
 plot(RPMQuaker(4,:),CLexpQuaker4,'--o')
 title('Experimental Coefficient of Lift for Quaker Oat Cylinder')
 xlabel('Velocity (m/s)')
-ylabel('CL')
-legend('Location','northwest','12 m/s','16 m/s','20 m/s','24 m/s')
+ylabel('C_L')
+legend('Location','northeast','12 m/s','16 m/s','20 m/s','24 m/s')
+grid on
 
 %% Misc Info
 
