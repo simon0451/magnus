@@ -304,17 +304,17 @@ l = legend('Location','northeast','24.0 m/s','19.8 m/s','12.0 m/s');
 %set(l,'FontSize',12);
 text(3150,24,'16.4 m/s wind speed has no data','FontSize',12);
 
-% Quaker cylinder
+% Stella cylinder
 figure;
 hold on;
-plot(RPMQuaker(4,:),forceQuaker(4,:),'--*');
-plot(RPMQuaker(3,:),forceQuaker(3,:),'--x');
-plot(RPMQuaker(2,:),forceQuaker(2,:),'--d');
-plot(RPMQuaker(1,:),forceQuaker(1,:),'--s');
+plot(RPMStella(4,:),forceStella(4,:),'--*');
+plot(RPMStella(3,:),forceStella(3,:),'--x');
+plot(RPMStella(2,:),forceStella(2,:),'--d');
+plot(RPMStella(1,:),forceStella(1,:),'--s');
 grid on;
 xlabel('Rotation Speed (RPM)');
 ylabel('Life Force (N)');
-title({'Measured Lift Force of Quaker Cylinder vs. RPM','at Constant Wind Speeds'});
+title({'Measured Lift Force of Stella Cylinder vs. RPM','at Constant Wind Speeds'});
 l = legend('Location','best','24.0 m/s','19.8 m/s','16.4 m/s','12.0 m/s');
 %set(l,'FontSize',12);
 
