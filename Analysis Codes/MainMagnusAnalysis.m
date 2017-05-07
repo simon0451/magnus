@@ -494,22 +494,22 @@ l = legend('Location','best','Experiment Data','Best fit line','Confidence of Fi
 % CL = Lift/length*rhoair*(velocity.^2)*radius
 
 % Coeffeicient of lift for Stella
-CLthStella1 = FLStella1/LStella*airrho*(speed1^2)*rStella;
-CLthStella2 = FLStella2/LStella*airrho*(speed2^2)*rStella;
-CLthStella3 = FLStella3/LStella*airrho*(speed3^2)*rStella;
-CLthStella4 = FLStella4/LStella*airrho*(speed4^2)*rStella;
+CLthStella1 = FLStella1/(LStella*airrho*(speed1^2)*rStella);
+CLthStella2 = FLStella2/(LStella*airrho*(speed2^2)*rStella);
+CLthStella3 = FLStella3/(LStella*airrho*(speed3^2)*rStella);
+CLthStella4 = FLStella4/(LStella*airrho*(speed4^2)*rStella);
 
 % Coeffeicient of lift for Bud Heavy
-CLthBud1 = FLBud1/LBud*airrho*(speed1^2)*rBud;
-CLthBud2 = FLBud2/LBud*airrho*(speed2^2)*rBud;
-CLthBud3 = FLBud3/LBud*airrho*(speed3^2)*rBud;
-CLthBud4 = FLBud4/LBud*airrho*(speed4^2)*rBud;
+CLthBud1 = FLBud1/(LBud*airrho*(speed1^2)*rBud);
+CLthBud2 = FLBud2/(LBud*airrho*(speed2^2)*rBud);
+CLthBud3 = FLBud3/(LBud*airrho*(speed3^2)*rBud);
+CLthBud4 = FLBud4/(LBud*airrho*(speed4^2)*rBud);
 
 % Coeffeicient of lift for Oats
-CLthQuaker1 = FLQuaker1/LQuaker*airrho*(speed1^2)*rQuaker;
-CLthQuaker2 = FLQuaker2/LQuaker*airrho*(speed2^2)*rQuaker;
-CLthQuaker3 = FLQuaker3/LQuaker*airrho*(speed3^2)*rQuaker;
-CLthQuaker4 = FLQuaker4/LQuaker*airrho*(speed4^2)*rQuaker;
+CLthQuaker1 = FLQuaker1/(LQuaker*airrho*(speed1^2)*rQuaker);
+CLthQuaker2 = FLQuaker2/(LQuaker*airrho*(speed2^2)*rQuaker);
+CLthQuaker3 = FLQuaker3/(LQuaker*airrho*(speed3^2)*rQuaker);
+CLthQuaker4 = FLQuaker4/(LQuaker*airrho*(speed4^2)*rQuaker);
 
 %% Plot Theoretical Coefficent of Lift
 
@@ -563,13 +563,13 @@ grid on
 
 % Coeffeicient of lift for Stella
 % Organized by trial (Constant windpeed, changing rpm)
-CLexpStella1 = forceStella(1,:)./LStella*airrho*(speed1^2)*rStella;
-CLexpStella2 = forceStella(2,:)./LStella*airrho*(speed2^2)*rStella;
-CLexpStella3 = forceStella(3,:)./LStella*airrho*(speed3^2)*rStella;
-CLexpStella4 = forceStella(4,:)./LStella*airrho*(speed4^2)*rStella;
+CLexpStella1 = forceStella(1,:)./(LStella*airrho*(speed1^2)*rStella);
+CLexpStella2 = forceStella(2,:)./(LStella*airrho*(speed2^2)*rStella);
+CLexpStella3 = forceStella(3,:)./(LStella*airrho*(speed3^2)*rStella);
+CLexpStella4 = forceStella(4,:)./(LStella*airrho*(speed4^2)*rStella);
 
 % Constant RPM and changing wind speed for Stella error analysis
-CLexpStella5 = liftForce./LStella*airrho.*(windSpeed.^2)*rStella;
+CLexpStella5 = liftForce./(LStella*airrho.*(windSpeed.^2)*rStella);
 windForceFitCL = polyfit(windSpeed,CLexpStella5,1);
 windForcexCL = linspace(windSpeed(1),windSpeed(end),6);
 windForceyCL = windForcexCL*windForceFitCL(1) + windForceFitCL(2);
@@ -586,17 +586,17 @@ maxMeaCfCL = windForceyCL + measCfCL;
 
 % Coeffeicient of lift for Bud Heavy
 % Organized by trial (Constant windpeed, changing rpm)
-CLexpBud1 = forceBud(1,:)./LBud*airrho*(speed1^2)*rBud;
-CLexpBud3 = forceBud(3,:)./LBud*airrho*(speed3^2)*rBud;
-CLexpBud4 = forceBud(4,:)./LBud*airrho*(speed4^2)*rBud;
+CLexpBud1 = forceBud(1,:)./(LBud*airrho*(speed1^2)*rBud);
+CLexpBud3 = forceBud(3,:)./(LBud*airrho*(speed3^2)*rBud);
+CLexpBud4 = forceBud(4,:)./(LBud*airrho*(speed4^2)*rBud);
 
 
 % Coeffeicient of lift for Oats
 % Organized by trial (Constant windpeed, changing rpm)
-CLexpQuaker1 = forceQuaker(1,:)./LQuaker*airrho*(speed1^2)*rQuaker;
-CLexpQuaker2 = forceQuaker(2,:)./LQuaker*airrho*(speed2^2)*rQuaker;
-CLexpQuaker3 = forceQuaker(3,:)./LQuaker*airrho*(speed3^2)*rQuaker;
-CLexpQuaker4 = forceQuaker(4,:)./LQuaker*airrho*(speed4^2)*rQuaker;
+CLexpQuaker1 = forceQuaker(1,:)./(LQuaker*airrho*(speed1^2)*rQuaker);
+CLexpQuaker2 = forceQuaker(2,:)./(LQuaker*airrho*(speed2^2)*rQuaker);
+CLexpQuaker3 = forceQuaker(3,:)./(LQuaker*airrho*(speed3^2)*rQuaker);
+CLexpQuaker4 = forceQuaker(4,:)./(LQuaker*airrho*(speed4^2)*rQuaker);
 
 %% Plot for Experimental Coefficient of Lift
 
@@ -633,15 +633,6 @@ title('Experimental Coefficient of Lift for Quaker Oat Cylinder')
 xlabel('Velocity (m/s)')
 ylabel('C_L')
 legend('Location','northeast','12 m/s','16 m/s','20 m/s','24 m/s')
-grid on
-
-figure
-hold on
-plot(windSpeed,CLexpStella5,'o')
-title('Coefficient of Lift vs. Wind Speed for Stella Cylinder')
-xlabel('Wind Speed (m/s)')
-ylabel('C_L')
-%legend('Location','northwest','12 m/s','16 m/s','20 m/s','24 m/s')
 grid on 
 
 figure;
