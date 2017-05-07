@@ -323,10 +323,10 @@ l = legend('Location','best','24 m/s','20 m/s','16 m/s','12 m/s');
 %% Calculating Reynolds number for 3 cylinders and all 4 speeds 
 
 speeds1to4 = [speed1,speed2,speed3,speed4];
-speeds1to4stella = [speed1,speed2,speed3,speed4,29.420];
+speeds1to5stella = [speed1,speed2,speed3,speed4,29.420];
 nu = 15.11e-6; % (m^2/s) kinematic viscosity of air at room temperature
 
-ReStella = speeds1to4stella.*(rStella*2)/nu;
+ReStella = speeds1to5stella.*(rStella*2)/nu;
 ReBud = speeds1to4.*(rBud*2)/nu;
 ReQuaker = speeds1to4.*(rQuaker*2)/nu;
 strReStella = sprintf('Re = %1.3d \n',ReStella);
@@ -357,7 +357,7 @@ xlim([10 26]);
 xlabel('Wind Speeds (m/s)','FontSize',12);
 ylabel('Lift Force (N)','FontSize',12);
 title({'Effect of Wind Speed on Stella Cylinder Lift Force','Assuming Constant RPM'});
-l = legend('Location','best','~3000 RPM','~4000 RPM','~6000 RPM');
+l = legend('Location','southwest','~3000 RPM','~4000 RPM','~6000 RPM');
 %set(l,'FontSize',12);
 
 % Bud Cylinder
@@ -491,25 +491,25 @@ l = legend('Location','best','Experiment Data','Best fit line','Confidence of Fi
 % Below calculations were done using the equation found 
 % in Tokumaru pdf
 % Note: in the document a = radius
-% CL = Lift/rhoair*(velocity.^2)*radius
+% CL = Lift/length*rhoair*(velocity.^2)*radius
 
 % Coeffeicient of lift for Stella
-CLthStella1 = FLStella1/airrho*(speed1^2)*rStella;
-CLthStella2 = FLStella2/airrho*(speed2^2)*rStella;
-CLthStella3 = FLStella3/airrho*(speed3^2)*rStella;
-CLthStella4 = FLStella4/airrho*(speed4^2)*rStella;
+CLthStella1 = FLStella1/LStella*airrho*(speed1^2)*rStella;
+CLthStella2 = FLStella2/LStella*airrho*(speed2^2)*rStella;
+CLthStella3 = FLStella3/LStella*airrho*(speed3^2)*rStella;
+CLthStella4 = FLStella4/LStella*airrho*(speed4^2)*rStella;
 
 % Coeffeicient of lift for Bud Heavy
-CLthBud1 = FLBud1/airrho*(speed1^2)*rBud;
-CLthBud2 = FLBud2/airrho*(speed2^2)*rBud;
-CLthBud3 = FLBud3/airrho*(speed3^2)*rBud;
-CLthBud4 = FLBud4/airrho*(speed4^2)*rBud;
+CLthBud1 = FLBud1/LBud*airrho*(speed1^2)*rBud;
+CLthBud2 = FLBud2/LBud*airrho*(speed2^2)*rBud;
+CLthBud3 = FLBud3/LBud*airrho*(speed3^2)*rBud;
+CLthBud4 = FLBud4/LBud*airrho*(speed4^2)*rBud;
 
 % Coeffeicient of lift for Oats
-CLthQuaker1 = FLQuaker1/airrho*(speed1^2)*rQuaker;
-CLthQuaker2 = FLQuaker2/airrho*(speed2^2)*rQuaker;
-CLthQuaker3 = FLQuaker3/airrho*(speed3^2)*rQuaker;
-CLthQuaker4 = FLQuaker4/airrho*(speed4^2)*rQuaker;
+CLthQuaker1 = FLQuaker1/LQuaker*airrho*(speed1^2)*rQuaker;
+CLthQuaker2 = FLQuaker2/LQuaker*airrho*(speed2^2)*rQuaker;
+CLthQuaker3 = FLQuaker3/LQuaker*airrho*(speed3^2)*rQuaker;
+CLthQuaker4 = FLQuaker4/LQuaker*airrho*(speed4^2)*rQuaker;
 
 %% Plot Theoretical Coefficent of Lift
 
@@ -549,6 +549,7 @@ ylabel('C_L')
 legend('Location','northwest','12 m/s','16 m/s','20 m/s','24 m/s')
 grid on 
 
+
 %% Calculateing the Coefficient of Lift 
 %  EXPERIMENTAL
 
@@ -562,24 +563,40 @@ grid on
 
 % Coeffeicient of lift for Stella
 % Organized by trial (Constant windpeed, changing rpm)
-CLexpStella1 = forceStella(1,:)./airrho*(speed1^2)*rStella;
-CLexpStella2 = forceStella(2,:)./airrho*(speed2^2)*rStella;
-CLexpStella3 = forceStella(3,:)./airrho*(speed3^2)*rStella;
-CLexpStella4 = forceStella(4,:)./airrho*(speed4^2)*rStella;
+CLexpStella1 = forceStella(1,:)./LStella*airrho*(speed1^2)*rStella;
+CLexpStella2 = forceStella(2,:)./LStella*airrho*(speed2^2)*rStella;
+CLexpStella3 = forceStella(3,:)./LStella*airrho*(speed3^2)*rStella;
+CLexpStella4 = forceStella(4,:)./LStella*airrho*(speed4^2)*rStella;
+
+% Constant RPM and changing wind speed for Stella error analysis
+CLexpStella5 = liftForce./LStella*airrho.*(windSpeed.^2)*rStella;
+windForceFitCL = polyfit(windSpeed,CLexpStella5,1);
+windForcexCL = linspace(windSpeed(1),windSpeed(end),6);
+windForceyCL = windForcexCL*windForceFitCL(1) + windForceFitCL(2);
+SSresCL = sum((CLexpStella5 - windForceyCL).^2);
+SyxCL = sqrt(SSresCL/dF);
+fitCfCL = t*SyxCL*sqrt(1/N + ((windSpeed - xMean).^2)/SSxx);
+minFitCfCL = windForceyCL - fitCfCL;
+maxFitCfCL = windForceyCL + fitCfCL;
+measCfCL = t*SyxCL*sqrt(1 + 1/N + ((windSpeed - xMean).^2)/SSxx);
+minMeaCfCL = windForceyCL - measCfCL;
+maxMeaCfCL = windForceyCL + measCfCL;
+
+
 
 % Coeffeicient of lift for Bud Heavy
 % Organized by trial (Constant windpeed, changing rpm)
-CLexpBud1 = forceBud(1,:)./airrho*(speed1^2)*rBud;
-CLexpBud3 = forceBud(3,:)./airrho*(speed3^2)*rBud;
-CLexpBud4 = forceBud(4,:)./airrho*(speed4^2)*rBud;
+CLexpBud1 = forceBud(1,:)./LBud*airrho*(speed1^2)*rBud;
+CLexpBud3 = forceBud(3,:)./LBud*airrho*(speed3^2)*rBud;
+CLexpBud4 = forceBud(4,:)./LBud*airrho*(speed4^2)*rBud;
 
 
 % Coeffeicient of lift for Oats
 % Organized by trial (Constant windpeed, changing rpm)
-CLexpQuaker1 = forceQuaker(1,:)./airrho*(speed1^2)*rQuaker;
-CLexpQuaker2 = forceQuaker(2,:)./airrho*(speed2^2)*rQuaker;
-CLexpQuaker3 = forceQuaker(3,:)./airrho*(speed3^2)*rQuaker;
-CLexpQuaker4 = forceQuaker(4,:)./airrho*(speed4^2)*rQuaker;
+CLexpQuaker1 = forceQuaker(1,:)./LQuaker*airrho*(speed1^2)*rQuaker;
+CLexpQuaker2 = forceQuaker(2,:)./LQuaker*airrho*(speed2^2)*rQuaker;
+CLexpQuaker3 = forceQuaker(3,:)./LQuaker*airrho*(speed3^2)*rQuaker;
+CLexpQuaker4 = forceQuaker(4,:)./LQuaker*airrho*(speed4^2)*rQuaker;
 
 %% Plot for Experimental Coefficient of Lift
 
@@ -617,6 +634,47 @@ xlabel('Velocity (m/s)')
 ylabel('C_L')
 legend('Location','northeast','12 m/s','16 m/s','20 m/s','24 m/s')
 grid on
+
+figure
+hold on
+plot(windSpeed,CLexpStella5,'o')
+title('Coefficient of Lift vs. Wind Speed for Stella Cylinder')
+xlabel('Wind Speed (m/s)')
+ylabel('C_L')
+%legend('Location','northwest','12 m/s','16 m/s','20 m/s','24 m/s')
+grid on 
+
+figure;
+plot(windSpeed,CLexpStella5,'x',windForcexCL,windForceyCL);
+hold on;
+p1 = plot(windSpeed,minFitCfCL,'r:');
+p2 = plot(windSpeed,maxFitCfCL,'r:');
+p3 = plot(windSpeed,minMeaCfCL,'b--');
+p4 = plot(windSpeed,maxMeaCfCL,'b--');
+set(get(get(p2,'Annotation'),'LegendInformation'),...
+    'IconDisplayStyle','off');
+set(get(get(p4,'Annotation'),'LegendInformation'),...
+    'IconDisplayStyle','off');
+xlabel('Wind Speed (m/s)','FontSize',12);
+ylabel('C_L','FontSize',12);
+title('Coefficient of Lift vs. Wind Speed for Stella Cylinder');
+l = legend('Location','best','Experiment Data','Best fit line','Confidence of Fit','Confidence of Measurement');
+
+%% Vortex Shedding 
+
+% Below approximation generally holds true for range of Reynolds numbers in
+% 250 < Re < 2x10^5
+
+% Strouhal Number
+StStella = 0.198*(1 - 19.7./ReStella);
+StBud = 0.198*(1 - 19.7./ReBud);
+StQuaker = 0.198*(1 - 19.7./ReQuaker);
+
+% f = St*v_wind/diameter
+% Vortex frequency
+fvStella = StStella.*speeds1to5stella/(rStella*2);
+fvBud = StBud.*speeds1to4/(rBud*2);
+fvQuaker = StQuaker.*speeds1to4/(rQuaker*2);
 
 %% Misc Info
 
