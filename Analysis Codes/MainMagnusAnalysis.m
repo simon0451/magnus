@@ -699,7 +699,7 @@ disp(mphstr2)
 disp(mphstr3)
 
 %%
-omega0_Stella1 = RPMStella(1,:)/60*2*pi*rStella/speed1;
+% omega0_Stella1 = RPMStella(1,:)/60*2*pi*rStella/speed1;
 omega0_Stella2 = RPMStella(2,:)/60*2*pi*rStella/speed2;
 omega0_Stella3 = RPMStella(3,:)/60*2*pi*rStella/speed3;
 omega0_Stella4 = RPMStella(4,:)/60*2*pi*rStella/speed4;
@@ -709,27 +709,32 @@ omega0_Quaker2 = RPMQuaker(2,:)/60*2*pi*rQuaker/speed2;
 omega0_Quaker3 = RPMQuaker(3,:)/60*2*pi*rQuaker/speed3;
 omega0_Quaker4 = RPMQuaker(4,:)/60*2*pi*rQuaker/speed4;
 
-omega0 = [omega0_Stella2;omega0_Stella3;omega0_Stella4;...
-    omega0_Quaker1;omega0_Quaker2;omega0_Quaker3;omega0_Quaker4];
-CLexp = [CLexpStella2;CLexpStella3;CLexpStella4;...
-    CLexpQuaker1;CLexpQuaker2;CLexpQuaker3;CLexpQuaker4];
+omega0 = [omega0_Stella2(1:2),omega0_Stella3,omega0_Stella4,...
+    omega0_Quaker1(2),omega0_Quaker2,omega0_Quaker3,omega0_Quaker4(1,3)];
+CLexp = [CLexpStella2(1:2),CLexpStella3,CLexpStella4,...
+    CLexpQuaker1(2),CLexpQuaker2,CLexpQuaker3,CLexpQuaker4(1,3)];
 
-omegafit = polyfit(omega0,CLexp.^2,1);
-bestfitOmega = omegafit(1)*omega0 + omegafit(2);
+[omegafit,S] = polyfit(omega0.^0.15,CLexp,1);
+1 - S.normr^2 / norm(CLexp-mean(CLexp))^2
+omega0Fit = linspace(0,3.5,100);
+% CLFit = omega0Fit.^(0.08);
+CLFit = omega0Fit.^0.15;
+
 
 figure;
 hold on;
-%plot(omega0_Stella1,CLexpStella1.^2,'*');
-plot(omega0_Stella2,CLexpStella2,'*');
+% plot(omega0_Stella1,CLexpStella1,'*');
+plot(omega0_Stella2(1:2),CLexpStella2(1:2),'*');
 plot(omega0_Stella3,CLexpStella3,'*');
 plot(omega0_Stella4,CLexpStella4,'*');
 
-plot(omega0_Quaker1,CLexpQuaker1,'*');
+plot(omega0_Quaker1(2),CLexpQuaker1(2),'*');
 plot(omega0_Quaker2,CLexpQuaker2,'*');
 plot(omega0_Quaker3,CLexpQuaker3,'*');
-plot(omega0_Quaker4,CLexpQuaker4,'*');
-plot(omega0,bestfitOmega,'--');
+plot(omega0_Quaker4(1,3),CLexpQuaker4(1,3),'*');
+plot(omega0Fit,CLFit,'--');
 % legend('location','northwest','
 box;
+ylim([0.3 1.5]);
 xlabel('\Omega_0 (normalized speed)','FontSize',12);
 ylabel('Lift Coefficient','FontSize',12);
