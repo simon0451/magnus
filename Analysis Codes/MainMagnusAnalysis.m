@@ -582,14 +582,11 @@ measCfCL = t*SyxCL*sqrt(1 + 1/N + ((windSpeed - xMean).^2)/SSxx);
 minMeaCfCL = windForceyCL - measCfCL;
 maxMeaCfCL = windForceyCL + measCfCL;
 
-
-
 % Coeffeicient of lift for Bud Heavy
 % Organized by trial (Constant windpeed, changing rpm)
 CLexpBud1 = forceBud(1,:)./(LBud*airrho*(speed1^2)*rBud);
 CLexpBud3 = forceBud(3,:)./(LBud*airrho*(speed3^2)*rBud);
 CLexpBud4 = forceBud(4,:)./(LBud*airrho*(speed4^2)*rBud);
-
 
 % Coeffeicient of lift for Oats
 % Organized by trial (Constant windpeed, changing rpm)
@@ -707,23 +704,32 @@ omega0_Stella2 = RPMStella(2,:)/60*2*pi*rStella/speed2;
 omega0_Stella3 = RPMStella(3,:)/60*2*pi*rStella/speed3;
 omega0_Stella4 = RPMStella(4,:)/60*2*pi*rStella/speed4;
 
-figure;
-hold on;
-plot(omega0_Stella1,CLexpStella1);
-plot(omega0_Stella2,CLexpStella2);
-plot(omega0_Stella3,CLexpStella3);
-plot(omega0_Stella4,CLexpStella4);
-
 omega0_Quaker1 = RPMQuaker(1,:)/60*2*pi*rQuaker/speed1;
 omega0_Quaker2 = RPMQuaker(2,:)/60*2*pi*rQuaker/speed2;
 omega0_Quaker3 = RPMQuaker(3,:)/60*2*pi*rQuaker/speed3;
 omega0_Quaker4 = RPMQuaker(4,:)/60*2*pi*rQuaker/speed4;
 
-plot(omega0_Quaker1,CLexpQuaker1);
-plot(omega0_Quaker2,CLexpQuaker2);
-plot(omega0_Quaker3,CLexpQuaker3);
-plot(omega0_Quaker4,CLexpQuaker4);
+omega0 = [omega0_Stella2;omega0_Stella3;omega0_Stella4;...
+    omega0_Quaker1;omega0_Quaker2;omega0_Quaker3;omega0_Quaker4];
+CLexp = [CLexpStella2;CLexpStella3;CLexpStella4;...
+    CLexpQuaker1;CLexpQuaker2;CLexpQuaker3;CLexpQuaker4];
 
+omegafit = polyfit(omega0,CLexp.^2,1);
+bestfitOmega = omegafit(1)*omega0 + omegafit(2);
+
+figure;
+hold on;
+%plot(omega0_Stella1,CLexpStella1.^2,'*');
+plot(omega0_Stella2,CLexpStella2,'*');
+plot(omega0_Stella3,CLexpStella3,'*');
+plot(omega0_Stella4,CLexpStella4,'*');
+
+plot(omega0_Quaker1,CLexpQuaker1,'*');
+plot(omega0_Quaker2,CLexpQuaker2,'*');
+plot(omega0_Quaker3,CLexpQuaker3,'*');
+plot(omega0_Quaker4,CLexpQuaker4,'*');
+plot(omega0,bestfitOmega,'--');
+% legend('location','northwest','
 box;
 xlabel('\Omega_0 (normalized speed)','FontSize',12);
 ylabel('Lift Coefficient','FontSize',12);
