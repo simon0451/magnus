@@ -98,7 +98,7 @@ xlabel('Cylinder Rotation Speed [RPM]');
 ylabel('Lift Force (N)');
 title('Stella Cylinder Lift Force vs. RPM at 19.8 m/s');
 l = legend('Magnus Predicted','Experiment Data','Experiment Fit','Location','best');
-%set(l,'FontSize',12);
+set(l,'FontSize',12);
 
 % speed2 plots
 figure;
@@ -607,7 +607,7 @@ plot(RPMStella(2,:),CLexpStella2,'--o')
 plot(RPMStella(3,:),CLexpStella3,'--o')
 plot(RPMStella(4,:),CLexpStella4,'--o')
 title('Experimental Coefficient of Lift for Stella Cylinder')
-xlabel('Velocity (m/s)')
+xlabel('Cylinder Rotation Speed (RPM)')
 ylabel('C_L')
 legend('Location','northwest','12.0 m/s','16.4 m/s','19.8 m/s','24.0 m/s')
 grid on 
@@ -618,7 +618,7 @@ plot(RPMBud(1,:),CLexpBud1,'--o')
 plot(RPMBud(3,:),CLexpBud3,'--o')
 plot(RPMBud(4,:),CLexpBud4,'--o')
 title('Experimental Coefficient of Lift for Bud Heavy Cylinder')
-xlabel('Velocity (m/s)')
+xlabel('Cylinder Rotation Speed (RPM)')
 ylabel('C_L')
 legend('Location','northwest','12.0 m/s','19.8 m/s','24.0 m/s')
 grid on 
@@ -630,7 +630,7 @@ plot(RPMQuaker(2,:),CLexpQuaker2,'--o')
 plot(RPMQuaker(3,:),CLexpQuaker3,'--o')
 plot(RPMQuaker(4,:),CLexpQuaker4,'--o')
 title('Experimental Coefficient of Lift for Quaker Oat Cylinder')
-xlabel('Velocity (m/s)')
+xlabel('Cylinder Rotation Speed (RPM)')
 ylabel('C_L')
 legend('Location','northwest','12.0 m/s','16.4 m/s','19.8 m/s','24.0 m/s')
 grid on 
@@ -650,6 +650,24 @@ xlabel('Wind Speed (m/s)','FontSize',12);
 ylabel('C_L','FontSize',12);
 title('Coefficient of Lift vs. Wind Speed for Stella Cylinder');
 l = legend('Location','best','Experiment Data','Best fit line','Confidence of Fit','Confidence of Measurement');
+
+%% Experimental vs Theoretical CL
+
+figure
+hold on
+plot(RPMStella(1,:),CLexpStella1,'b--o')
+plot(RPMStella(2,:),CLexpStella2,'r--o')
+plot(RPMStella(3,:),CLexpStella3,'y--o')
+plot(RPMStella(4,:),CLexpStella4,'c--o')
+plot(RPMMagnusStella,CLthStella1,'b-')
+plot(RPMMagnusStella,CLthStella2,'r-')
+plot(RPMMagnusStella,CLthStella3,'y-')
+plot(RPMMagnusStella,CLthStella4,'c-')
+title({'Experimental vs Theoretical Coefficient of Lift','for the Stella Cylinder'})
+xlabel('Cylinde Rotation Speed (RPM)')
+ylabel('C_L')
+legend('Location','northwest','12.0 m/s','16.4 m/s','19.8 m/s','24.0 m/s')
+grid on 
 
 %% Vortex Shedding 
 
