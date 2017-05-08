@@ -603,9 +603,9 @@ CLexpQuaker4 = forceQuaker(4,:)./(LQuaker*airrho*(speed4^2)*rQuaker);
 figure
 hold on
 plot(RPMStella(1,:),CLexpStella1,'--o')
-plot(RPMStella(2,:),CLexpStella2,'--o')
-plot(RPMStella(3,:),CLexpStella3,'--o')
-plot(RPMStella(4,:),CLexpStella4,'--o')
+plot(RPMStella(2,:),CLexpStella2,'--X')
+plot(RPMStella(3,:),CLexpStella3,'--*')
+plot(RPMStella(4,:),CLexpStella4,'--d')
 title('Experimental Coefficient of Lift for Stella Cylinder')
 xlabel('Cylinder Rotation Speed (RPM)')
 ylabel('C_L')
@@ -615,8 +615,8 @@ grid on
 figure
 hold on
 plot(RPMBud(1,:),CLexpBud1,'--o')
-plot(RPMBud(3,:),CLexpBud3,'--o')
-plot(RPMBud(4,:),CLexpBud4,'--o')
+plot(RPMBud(3,:),CLexpBud3,'--X')
+plot(RPMBud(4,:),CLexpBud4,'--*')
 title('Experimental Coefficient of Lift for Bud Heavy Cylinder')
 xlabel('Cylinder Rotation Speed (RPM)')
 ylabel('C_L')
@@ -626,9 +626,9 @@ grid on
 figure
 hold on
 plot(RPMQuaker(1,:),CLexpQuaker1,'--o')
-plot(RPMQuaker(2,:),CLexpQuaker2,'--o')
-plot(RPMQuaker(3,:),CLexpQuaker3,'--o')
-plot(RPMQuaker(4,:),CLexpQuaker4,'--o')
+plot(RPMQuaker(2,:),CLexpQuaker2,'--X')
+plot(RPMQuaker(3,:),CLexpQuaker3,'--*')
+plot(RPMQuaker(4,:),CLexpQuaker4,'--d')
 title('Experimental Coefficient of Lift for Quaker Oat Cylinder')
 xlabel('Cylinder Rotation Speed (RPM)')
 ylabel('C_L')
@@ -702,14 +702,28 @@ disp(mphstr2)
 disp(mphstr3)
 
 %%
-RPMStella(1,:)
-RPMStella(2,:)
-RPMStella(3,:)
-RPMStella(4,:)
-CLexpStella1
-CLexpStella2
-CLexpStella3
-CLexpStella4
-CLexpStella5
-rStella
-LStella
+omega0_Stella1 = RPMStella(1,:)/60*2*pi*rStella/speed1;
+omega0_Stella2 = RPMStella(2,:)/60*2*pi*rStella/speed2;
+omega0_Stella3 = RPMStella(3,:)/60*2*pi*rStella/speed3;
+omega0_Stella4 = RPMStella(4,:)/60*2*pi*rStella/speed4;
+
+figure;
+hold on;
+plot(omega0_Stella1,CLexpStella1);
+plot(omega0_Stella2,CLexpStella2);
+plot(omega0_Stella3,CLexpStella3);
+plot(omega0_Stella4,CLexpStella4);
+
+omega0_Quaker1 = RPMQuaker(1,:)/60*2*pi*rQuaker/speed1;
+omega0_Quaker2 = RPMQuaker(2,:)/60*2*pi*rQuaker/speed2;
+omega0_Quaker3 = RPMQuaker(3,:)/60*2*pi*rQuaker/speed3;
+omega0_Quaker4 = RPMQuaker(4,:)/60*2*pi*rQuaker/speed4;
+
+plot(omega0_Quaker1,CLexpQuaker1);
+plot(omega0_Quaker2,CLexpQuaker2);
+plot(omega0_Quaker3,CLexpQuaker3);
+plot(omega0_Quaker4,CLexpQuaker4);
+
+box;
+xlabel('\Omega_0 (normalized speed)','FontSize',12);
+ylabel('Lift Coefficient','FontSize',12);
