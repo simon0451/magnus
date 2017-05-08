@@ -701,3 +701,15 @@ disp(mphstr1)
 disp(mphstr2)
 disp(mphstr3)
 
+%%
+RPMStella(1,:)
+RPMStella(2,:)
+RPMStella(3,:)
+RPMStella(4,:)
+CLexpStella1
+CLexpStella2
+CLexpStella3
+CLexpStella4
+CLexpStella5
+rStella
+LStella
