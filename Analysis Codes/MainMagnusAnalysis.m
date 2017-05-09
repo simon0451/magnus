@@ -481,7 +481,7 @@ set(get(get(p4,'Annotation'),'LegendInformation'),...
     'IconDisplayStyle','off');
 xlabel('Wind Speed (m/s)','FontSize',12);
 ylabel('Lift Force (N)','FontSize',12);
-title('Lift Force vs. Wind Speed for Stella Cylinder');
+title({'Experimental Lift Force vs. Wind Speed','for the Stella Cylinder'});
 l = legend('Location','best','Experiment Data','Best fit line','Confidence of Fit','Confidence of Measurement');
 %set(l,'FontSize',12);
 
@@ -645,25 +645,41 @@ set(get(get(p4,'Annotation'),'LegendInformation'),...
     'IconDisplayStyle','off');
 xlabel('Wind Speed (m/s)','FontSize',12);
 ylabel('C_L','FontSize',12);
-title('Coefficient of Lift vs. Wind Speed for Stella Cylinder');
+title({'Experimental Coefficient of Lift vs. Wind Speed','for the Stella Cylinder'});
 l = legend('Location','best','Experiment Data','Best fit line','Confidence of Fit','Confidence of Measurement');
 
 %% Experimental vs Theoretical CL
 
+CLfitStella1 = polyfit(RPMStella(1,:),CLexpStella1,1);
+CLfitStella2 = polyfit(RPMStella(2,:),CLexpStella2,1);
+CLfitStella3 = polyfit(RPMStella(3,:),CLexpStella3,1);
+CLfitStella4 = polyfit(RPMStella(4,:),CLexpStella4,1);
+bfStella1 = RPMStella(1,:)*CLfitStella1(1) + CLfitStella1(2);
+bfStella2 = RPMStella(2,:)*CLfitStella2(1) + CLfitStella2(2);
+bfStella3 = RPMStella(3,:)*CLfitStella3(1) + CLfitStella3(2);
+bfStella4 = RPMStella(4,:)*CLfitStella4(1) + CLfitStella4(2);
+
 figure
 hold on
-plot(RPMStella(1,:),CLexpStella1,'b--o')
-plot(RPMStella(2,:),CLexpStella2,'r--o')
-plot(RPMStella(3,:),CLexpStella3,'y--o')
-plot(RPMStella(4,:),CLexpStella4,'c--o')
-plot(RPMMagnusStella,CLthStella1,'b-')
-plot(RPMMagnusStella,CLthStella2,'r-')
-plot(RPMMagnusStella,CLthStella3,'y-')
-plot(RPMMagnusStella,CLthStella4,'c-')
+plot(RPMStella(1,:),CLexpStella1,'bo')
+plot(RPMStella(2,:),CLexpStella2,'rx')
+plot(RPMStella(3,:),CLexpStella3,'kd')
+plot(RPMStella(4,:),CLexpStella4,'c*')
+bf1 = plot(RPMStella(1,:),bfStella1,'b-');
+bf2 = plot(RPMStella(2,:),bfStella2,'r-');
+bf3 = plot(RPMStella(3,:),bfStella3,'k-');
+bf4 = plot(RPMStella(4,:),bfStella4,'c-');
+plot(RPMMagnusStella,CLthStella1,'b--')
+plot(RPMMagnusStella,CLthStella2,'r--')
+plot(RPMMagnusStella,CLthStella3,'k--')
+plot(RPMMagnusStella,CLthStella4,'c--')
 title({'Experimental vs Theoretical Coefficient of Lift','for the Stella Cylinder'})
-xlabel('Cylinde Rotation Speed (RPM)')
+xlabel('Cylinder Rotation Speed (RPM)')
 ylabel('C_L')
-legend('Location','northwest','12.0 m/s','16.4 m/s','19.8 m/s','24.0 m/s')
+text(4000,bfStella1(3),'Experimental Best Fit line \downarrow','verticalalignment','top')
+text(3500,CLthStella1(end-3),'Dashed lines represent theoretical C_L \downarrow','verticalalignment','top')
+legend([bf1 bf2 bf3 bf4],{'12.0 m/s','16.4 m/s','19.8 m/s','24.0 m/s'},'Location','northwest')
+
 grid on 
 
 %% Vortex Shedding 
@@ -699,7 +715,8 @@ disp(mphstr2)
 disp(mphstr3)
 
 %%
-% omega0_Stella1 = RPMStella(1,:)/60*2*pi*rStella/speed1;
+
+%omega0_Stella1 = RPMStella(1,:)/60*2*pi*rStella/speed1;
 omega0_Stella2 = RPMStella(2,:)/60*2*pi*rStella/speed2;
 omega0_Stella3 = RPMStella(3,:)/60*2*pi*rStella/speed3;
 omega0_Stella4 = RPMStella(4,:)/60*2*pi*rStella/speed4;
@@ -714,27 +731,28 @@ omega0 = [omega0_Stella2(1:2),omega0_Stella3,omega0_Stella4,...
 CLexp = [CLexpStella2(1:2),CLexpStella3,CLexpStella4,...
     CLexpQuaker1(2),CLexpQuaker2,CLexpQuaker3,CLexpQuaker4(1,3)];
 
-[omegafit,S] = polyfit(omega0.^0.15,CLexp,1);
+[omegafit,S] = polyfit(omega0.^.1,CLexp,1);
 1 - S.normr^2 / norm(CLexp-mean(CLexp))^2
 omega0Fit = linspace(0,3.5,100);
 % CLFit = omega0Fit.^(0.08);
-CLFit = omega0Fit.^0.15;
+CLFit = omega0Fit.^0.1;
 
 
 figure;
 hold on;
 % plot(omega0_Stella1,CLexpStella1,'*');
-plot(omega0_Stella2(1:2),CLexpStella2(1:2),'*');
-plot(omega0_Stella3,CLexpStella3,'*');
-plot(omega0_Stella4,CLexpStella4,'*');
+pp1 = plot(omega0_Stella2(1:2),CLexpStella2(1:2),'b*');
+plot(omega0_Stella3,CLexpStella3,'b*');
+plot(omega0_Stella4,CLexpStella4,'b*');
 
-plot(omega0_Quaker1(2),CLexpQuaker1(2),'*');
-plot(omega0_Quaker2,CLexpQuaker2,'*');
-plot(omega0_Quaker3,CLexpQuaker3,'*');
-plot(omega0_Quaker4(1,3),CLexpQuaker4(1,3),'*');
-plot(omega0Fit,CLFit,'--');
-% legend('location','northwest','
+pp2 = plot(omega0_Quaker1(2),CLexpQuaker1(2),'r*');
+plot(omega0_Quaker2,CLexpQuaker2,'r*');
+plot(omega0_Quaker3,CLexpQuaker3,'r*');
+plot(omega0_Quaker4(1,3),CLexpQuaker4(1,3),'r*');
+pp3 = plot(omega0Fit,CLFit,'--');
+
 box;
 ylim([0.3 1.5]);
 xlabel('\Omega_0 (normalized speed)','FontSize',12);
-ylabel('Lift Coefficient','FontSize',12);
+ylabel('C_L','FontSize',12);
+legend([pp1 pp2 pp3],{'Stella C_L','Quaker Oats C_L','Representive Fit Line'},'Location','southeast')
